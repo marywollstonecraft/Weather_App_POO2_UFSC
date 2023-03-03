@@ -1,16 +1,15 @@
-from kivy.app import App
-from kivy.lang import Builder
 from API import API
-
-GUI = Builder.load_file('Interface.kv')
 
 class WeatherApp(App):
     def buld(self):
         return GUI
 
-    
+class MyWidget(Widget):
+    def build(self):
+        return MyWidget()
 
 
-
-
-WeatherApp().run()
+if __name__ == "__main__":
+    GUI = Builder.load_file('Interface.kv')
+    WeatherApp().run()
+    WidgetApp().run()
