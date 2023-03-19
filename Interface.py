@@ -1,15 +1,13 @@
-from API import API
+from tkinter import *
+import requests
+import json
+from datetime import datetime
 
-class WeatherApp(App):
-    def buld(self):
-        return GUI
+root = Tk()
+root.geometry("1242x2208")
+#X = [-621, +621]
+#Y = [-1104, +1104]
 
-class MyWidget(Widget):
-    def build(self):
-        return MyWidget()
+root.resizable(True, True)
+root.title("Weather App")
 
-
-if __name__ == "__main__":
-    GUI = Builder.load_file('Interface.kv')
-    WeatherApp().run()
-    WidgetApp().run()
