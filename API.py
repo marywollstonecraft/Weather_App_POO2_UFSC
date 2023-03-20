@@ -3,7 +3,7 @@ import requests
 import json
 from pprint import pprint
 
-data = {"defaut":"acadd25a0f2a9c1c0350a18778c600d6"}
+data = {"defaut":"INSERIR API"}
 
 # """
 # with open('all_keys.json', 'w', encoding='utf-8') as f:
