@@ -3,30 +3,33 @@ import requests
 import json
 from pprint import pprint
 
-data = {"defaut":"INSERIR API"}
+KEYAPI = ''
 
-# """
-# with open('all_keys.json', 'w', encoding='utf-8') as f:
-#     json.dump(data, f, ensure_ascii=False, indent=4)
-# """
+CITY = ''
 
 class API:
-    def __init__(self, API = data['defaut'], city='Manaus'):
+    def __init__(self, API = KEYAPI, city=CITY):
         self.__API_key = API
-        self.city = city
+        self.__city = city
         self.__base_url = "http://api.openweathermap.org/data/2.5/weather?appid=" + self.__API_key + "&q=" + self.city
+        
+        
         self.weather_data = requests.get(self.__base_url).json()
-        self.temp_kelvin = self.weather_data['main']['temp']
-        self.temp_celcius = self.kelvin_to_celsius()
-        self.temp_fahrenheit = self.celcius_fahrenheit()
+        if weather_data['cod'] != '404':
+            #temperaturas:
+            self.var_kelvin = self.weather_data['main']['temp']
+            self.var_celcius = self.var_kelvin - 273.15
+            self.var_fahrenheit = self.self.var_celcius * (9/5) + 32
+            #pressão:
+            self.var_pressure = self.weather_data['main']['pressure']
+            #humidade:
+            self.var_humidity = self.weather_data['main']['humidity']
+            #descrição:
+            val_weather = self.weather_data['main']['weather']
+            self.description = val_weather[0]['description']
 
-    def kelvin_to_celsius(self):
-        return self.temp_kelvin - 273.15
-    
-    def celcius_fahrenheit(self):
-        return self.temp_celcius * (9/5) + 32
+    def change_city(self, new_city):
+        self.__city = new_city
 
-    def change_API_key(self, new_API_key):
-        self.__change_API_key(new_API_key)
 
 API = API()
