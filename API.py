@@ -1,4 +1,3 @@
-import datetime as dt
 import requests
 import json
 
@@ -13,5 +12,4 @@ class API:
         with open("weather_data.json", "w") as outfile:
             json.dump(self.weather_data, outfile)
 
-API = API()
 

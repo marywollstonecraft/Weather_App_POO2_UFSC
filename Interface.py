@@ -1,13 +1,22 @@
 from tkinter import *
-import requests
-import json
-from datetime import datetime
+class TELA_PRINCIPAL(Tk):
+    def __init__(self):
+        super().__init__()
+        #configurando a janela principal
+        self.geometry("600x600")
+        self.resizable(True, True)
+        self.title("Weather-App - UFSC POO2")
+        #background image
+        self.bg_image = PhotoImage(file = 'images/png/background.png')
+        self.label_bg = Label(self, image=self.bg_image)
+        self.label_bg.place(x = 0, y = 0)
+        #configurando botoes
+        self.b_search = Button(self)
+        self.b_search['command'] = self.pesquisar
+        #configurando input da pesquisa
+        self.e_search = Entry(self)
+    def pesquisar(self):
+        pass
 
-root = Tk()
-root.geometry("1242x2208")
-#X = [-621, +621]
-#Y = [-1104, +1104]
-
-root.resizable(True, True)
-root.title("Weather App")
-
+w = TELA_PRINCIPAL()
+w.mainloop()

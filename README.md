@@ -26,6 +26,7 @@ O arquivo API.py utilizando uma key privada realiza a função de extração de 
 * matplotlib
 * numpy
 
+
 ## Funcionalidades do Projeto:
 * Pesquisa de Região Geográfica
 * Extrair dados por meio de uma API
