@@ -1,2 +1,6 @@
-kyvi
-pytest
+requests
+tk
+pandas
+matplotlib
+numpy
+geopy
