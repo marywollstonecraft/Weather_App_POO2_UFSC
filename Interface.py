@@ -5,7 +5,7 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
-
+from API import *
 
 class TELA_PRINCIPAL(Tk):
     def __init__(self):
@@ -34,8 +34,8 @@ class TELA_PRINCIPAL(Tk):
         self.search_txtfield.focus()
 
         self.bind('<Return>', self.getWeather)
-        # self.search_buttom = Button(self, bd= 15, command=self.getWeather, )
-        # self.search_buttom.place(x=330, y= 880)
+        self.search_buttom = Button(self, bd= 15, command=self.getWeather, background='black' )
+        self.search_buttom.place(x=330, y= 880)
 
         #information keys
         inf_font = ('Helvetica', 30, 'bold')
@@ -97,8 +97,21 @@ class TELA_PRINCIPAL(Tk):
             local_time = datetime.now(home)
             current_time = local_time.strftime('%I:%M %p')
             self.var_clock.config(text=current_time)
-        except AttributeError:
-            self.messagebox.showinfo('WRONG CITY')
+
+            city_data = Api(CITY=city)
+
+            self.var_temp.config(text=city_data.var_temperature)
+            self.var_feels_like.config(text=city_data.var_feels_like)
+            self.var_wind.config(text=city_data.var_wind)
+            self.var_humidity.config(text=city_data.var_humidity)
+            self.var_pressure.config(text=city_data.var_pressure)
+            self.var_sunrise_time.config(text=city_data.var_sunrise_time)
+            self.var_sunset_time.config(text=city_data.var_sunset_time)
+            self.var_timezone.config(text=city_data.var_timezone)
+
+        except:
+            print('error getWeather')
+            pass
 
 w = TELA_PRINCIPAL()
 w.mainloop()
