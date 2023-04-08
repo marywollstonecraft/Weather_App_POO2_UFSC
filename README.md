@@ -5,7 +5,7 @@
 ### Uma aplicação python que extraia dados de clima e exiba-os na tela, com pesquisa de região, mostrando a previsão do dia e do restante da semana. 
 
 ## Linguagens utilizadas:
-<img src="https://github.com/mestre-dos-magos/weather-app/blob/0e0d01fe738bba5d6f662c9e59ad299cebf44deb/images/Python-logo-notext.svg.png" width="150" height="150" /> <img src="https://wiki.postgresql.org/images/9/9a/PostgreSQL_logo.3colors.540x557.png" width="150" height="150" />
+<img src="https://github.com/mestre-dos-magos/weather-app/blob/0e0d01fe738bba5d6f662c9e59ad299cebf44deb/images/Python-logo-notext.svg.png" width="150" height="150" /> 
 
 ## Dados obtidos:
 <img src="https://seeklogo.com/images/O/openweather-logo-3CE20F48B5-seeklogo.com.png" />
