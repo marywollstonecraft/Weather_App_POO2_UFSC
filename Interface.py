@@ -16,6 +16,7 @@ class TELA_PRINCIPAL(Tk):
         self.b_search['command'] = self.pesquisar
         #configurando input da pesquisa
         self.e_search = Entry(self)
+        
     def pesquisar(self):
         pass
 
