@@ -14,9 +14,9 @@ class Api:
         self.CITY = CITY
         self.METRICS = METRICS
         url = self.BASE_URL + "appid=" + self.API_KEY + "&q=" + self.CITY + "&metrics=" + self.METRICS
-        self.weather_data = requests.get(url, timeout=10).json()
+        self.weather_data = requests.get(url, timeout=5).json()
 
-        with open("data/weather_data_.json", "w", encoding='UTF-8') as outfile:
+        with open("data/weather_data.json", "w", encoding='UTF-8') as outfile:
             json.dump(self.weather_data, outfile)
 
         self.weather_data_request_sucess = self.weather_data['cod'] == 200
