@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 from geopy.geocoders import Nominatim
 from timezonefinder import TimezoneFinder
 from datetime import datetime
@@ -32,8 +33,13 @@ class TELA_PRINCIPAL(Tk):
         self.search_txtfield.place(x=110, y=890)
         self.search_txtfield.focus()
 
+        self.bind('<Return>', self.getWeather)
+        # self.search_buttom = Button(self, bd= 15, command=self.getWeather, )
+        # self.search_buttom.place(x=330, y= 880)
+
         #information keys
         inf_font = ('Helvetica', 30, 'bold')
+        self.inf_clock = Label(self, font=inf_font, text='Current Time', fg='black', bg='#1ab5ef')
         self.inf_temp = Label(self, text='Temperatura:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_feels_like = Label(self, text='Sensação térmica:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_wind = Label(self, text='Vel. Vento:', font=inf_font, fg='white', bg='#1ab5ef')
@@ -42,10 +48,9 @@ class TELA_PRINCIPAL(Tk):
         self.inf_sunrise_time = Label(self, text='Amanhecer:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_sunset_time = Label(self, text='Pôr do Sol:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_timezone = Label(self, text='Vel. Vento:', font=inf_font, fg='white', bg='#1ab5ef')
-        self.inf_name_city = Label(self, font=inf_font, text='**')
-        self.inf_clock = Label(self, font=inf_font)
-
+        
         #information keys plots
+        self.inf_clock.place(x=500,y=900)
         self.inf_temp.place(x=70, y=70)
         self.inf_feels_like.place(x=70, y=140)
         self.inf_wind.place(x=70, y=210)
@@ -54,10 +59,9 @@ class TELA_PRINCIPAL(Tk):
         self.inf_sunrise_time.place(x=70, y=420)
         self.inf_sunset_time.place(x=70, y=490)
         self.inf_timezone.place(x=70, y=560)
-        self.inf_name_city(x=600,y=600)
-        self.inf_clock.place(x=600,y=600)
 
         # information variables 
+        self.var_clock = Label(self, font=inf_font, text='city-clock', fg='black', bg='#1ab5ef')
         self.var_temp = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
         self.var_feels_like = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
         self.var_wind = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
@@ -68,6 +72,8 @@ class TELA_PRINCIPAL(Tk):
         self.var_timezone = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
         
         # information variables plots
+        
+        self.var_clock.place(x=770,y=900)
         self.var_temp.place(x=330, y=70)
         self.var_feels_like.place(x=425, y=140)
         self.var_wind.place(x=280, y=210)
@@ -77,17 +83,22 @@ class TELA_PRINCIPAL(Tk):
         self.var_sunrise_time.place(x=305, y=420)
         self.var_sunset_time.place(x=290, y=490)
         self.var_timezone.place(x=280, y=560)
+        
 
-        def getWeather(self):
-            city = search_txtfield.get()
+    def getWeather(self):
+        city = self.search_txtfield.get()
+        try:
             geolocator = Nominatim(user_agent='geopiExercises')
             location= geolocator.geocode(city)
             obj = TimezoneFinder()
             result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
-            
+                
             home = pytz.timezone(result)
             local_time = datetime.now(home)
             current_time = local_time.strftime('%I:%M %p')
+            self.var_clock.config(text=current_time)
+        except AttributeError:
+            self.messagebox.showinfo('WRONG CITY')
 
 w = TELA_PRINCIPAL()
 w.mainloop()
