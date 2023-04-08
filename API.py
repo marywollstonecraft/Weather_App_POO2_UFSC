@@ -49,5 +49,3 @@ class Api:
 
         else:
             print(" City Not Found ")
-
-API = Api()
