@@ -1,4 +1,5 @@
 from tkinter import *
+
 class TELA_PRINCIPAL(Tk):
     def __init__(self):
         super().__init__()
