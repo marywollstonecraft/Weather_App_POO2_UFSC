@@ -42,7 +42,9 @@ class TELA_PRINCIPAL(Tk):
         self.inf_sunrise_time = Label(self, text='Amanhecer:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_sunset_time = Label(self, text='Pôr do Sol:', font=inf_font, fg='white', bg='#1ab5ef')
         self.inf_timezone = Label(self, text='Vel. Vento:', font=inf_font, fg='white', bg='#1ab5ef')
-        
+        self.inf_name_city = Label(self, font=inf_font, text='**')
+        self.inf_clock = Label(self, font=inf_font)
+
         #information keys plots
         self.inf_temp.place(x=70, y=70)
         self.inf_feels_like.place(x=70, y=140)
@@ -52,6 +54,8 @@ class TELA_PRINCIPAL(Tk):
         self.inf_sunrise_time.place(x=70, y=420)
         self.inf_sunset_time.place(x=70, y=490)
         self.inf_timezone.place(x=70, y=560)
+        self.inf_name_city(x=600,y=600)
+        self.inf_clock.place(x=600,y=600)
 
         # information variables 
         self.var_temp = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
@@ -75,7 +79,7 @@ class TELA_PRINCIPAL(Tk):
         self.var_timezone.place(x=280, y=560)
 
         def getWeather(self):
-            city = textfield.get()
+            city = search_txtfield.get()
             geolocator = Nominatim(user_agent='geopiExercises')
             location= geolocator.geocode(city)
             obj = TimezoneFinder()
