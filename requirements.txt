@@ -1,6 +1,2 @@
 requests
 tk
-pandas
-matplotlib
-numpy
-geopy
