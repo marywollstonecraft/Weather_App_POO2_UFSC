@@ -5,6 +5,8 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
+from API import *
+from tkinter.messagebox import showinfo
 
 class TELA_PRINCIPAL(Tk):
     def __init__(self):
@@ -35,6 +37,14 @@ class TELA_PRINCIPAL(Tk):
         self.bind('<Return>', self.getWeather)
         self.search_buttom = Button(self, bd= 15, command=self.getWeather, background='black' )
         self.search_buttom.place(x=330, y= 880)
+        
+        #types selection
+        self.options_list = ('metric', 'imperial', 'standard')
+        self.option_var = StringVar(self)
+        self.menu_units = OptionMenu(self, self.option_var, self.options_list[0], *self.options_list, command=self.option_changed)
+        self.menu_units.place(x=400,y=400)
+        self.output_label = Label(self, foreground='red')
+        self.output_label.place(x=400, y=500)
 
         #information keys
         inf_font = ('Helvetica', 30, 'bold')
@@ -82,6 +92,14 @@ class TELA_PRINCIPAL(Tk):
         self.var_sunset_time.place(x=290, y=490)
         self.var_timezone.place(x=280, y=560)
 
+    def show_window(self, text='0001'):
+        showinfo(
+            title=text,
+            message= show_window.get())
+    
+    def option_changed(self, *args):
+        self.output_label['text'] = f'You selected: {self.option_var.get()}'
+
     def getWeather(self):
         city = self.search_txtfield.get()
         try:
@@ -95,7 +113,10 @@ class TELA_PRINCIPAL(Tk):
             current_time = local_time.strftime('%I:%M %p')
             self.var_clock.config(text=current_time)
 
-            city_data = Api(CITY=city)
+
+            METRICS = 'metric'
+
+            city_data = City_Data(CITY=city, METRICS=METRICS)
 
             self.var_temp.config(text=city_data.var_temperature)
             self.var_feels_like.config(text=city_data.var_feels_like)
@@ -107,4 +128,4 @@ class TELA_PRINCIPAL(Tk):
             self.var_timezone.config(text=city_data.var_timezone)
 
         except:
-            print('error getWeather')
+            self.show_window('getWeather ERROR')
