@@ -21,6 +21,14 @@ class Api:
 
         self.weather_data_request_sucess = self.weather_data['cod'] == 200
 
+    def __str__(self):
+                return f"""{self.CITY}
+                {self.METRICS}
+                {self.weather_data}"""
+
+class City(Api):
+    def __init__(self):
+        super().__init__()
         if self.weather_data_request_sucess:
             self.var_icon = self.weather_data['weather'][0]['icon']
             self.var_temperature = self.weather_data['main']['temp']
@@ -36,8 +44,9 @@ class Api:
 
         else:
             print(" City Not Found ")
-        
-        def __str__(self):
-            return f"""{self.CITY}
-            {self.METRICS}
-            {self.weather_data}"""
+
+    def __str__(self):
+                return f"""{self.CITY}
+                {self.var_temperature}
+                {self.var_description}"""
+            

@@ -5,7 +5,6 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
-from API import *
 
 class TELA_PRINCIPAL(Tk):
     def __init__(self):
@@ -72,7 +71,6 @@ class TELA_PRINCIPAL(Tk):
         self.var_timezone = Label(self, text='...', font= inf_font, fg='black', bg='#1ab5ef')
         
         # information variables plots
-        
         self.var_clock.place(x=770,y=900)
         self.var_temp.place(x=330, y=70)
         self.var_feels_like.place(x=425, y=140)
@@ -83,7 +81,6 @@ class TELA_PRINCIPAL(Tk):
         self.var_sunrise_time.place(x=305, y=420)
         self.var_sunset_time.place(x=290, y=490)
         self.var_timezone.place(x=280, y=560)
-        
 
     def getWeather(self):
         city = self.search_txtfield.get()
@@ -111,7 +108,3 @@ class TELA_PRINCIPAL(Tk):
 
         except:
             print('error getWeather')
-            pass
-
-w = TELA_PRINCIPAL()
-w.mainloop()

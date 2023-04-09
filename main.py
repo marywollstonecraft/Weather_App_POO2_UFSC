@@ -1,15 +1,7 @@
 from Interface import *
-# metrics = {
-#     '1' : 'metric',
-#     '2' : 'imperial'
-# }
+from API import *
 
-# metrics = input(f'which metrics? {metrics}\n')
-# city = input('insert city\n')
-
-# try:
-#     api = Api(CITY= city, METRICS= metrics)
-# except:
-#     api = Api()
+tela_principal = TELA_PRINCIPAL()
+tela_principal.mainloop()
 
 
