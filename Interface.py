@@ -5,7 +5,7 @@ from timezonefinder import TimezoneFinder
 from datetime import datetime
 import requests
 import pytz
-from API import *
+from City_Data import *
 from tkinter.messagebox import showinfo
 
 class TELA_PRINCIPAL(Tk):
@@ -34,17 +34,15 @@ class TELA_PRINCIPAL(Tk):
         self.search_txtfield.place(x=110, y=890)
         self.search_txtfield.focus()
 
-        self.bind('<Return>', self.getWeather)
         self.search_buttom = Button(self, bd= 15, command=self.getWeather, background='black' )
         self.search_buttom.place(x=330, y= 880)
         
         #types selection
-        self.options_list = ('metric', 'imperial', 'standard')
-        self.option_var = StringVar(self)
-        self.menu_units = OptionMenu(self, self.option_var, self.options_list[0], *self.options_list, command=self.option_changed)
-        self.menu_units.place(x=400,y=400)
-        self.output_label = Label(self, foreground='red')
-        self.output_label.place(x=400, y=500)
+        self.metrics_list = ('metric', 'imperial', 'standard')
+        self.value_inside = StringVar(self)
+        self.value_inside.set("Select an Metric Type")
+        self.option_metrics = OptionMenu(self, self.value_inside, self.metrics_list[0] *self.metrics_list)
+        self.question_menu.place(x=500, y=940)
 
         #information keys
         inf_font = ('Helvetica', 30, 'bold')
@@ -92,40 +90,33 @@ class TELA_PRINCIPAL(Tk):
         self.var_sunset_time.place(x=290, y=490)
         self.var_timezone.place(x=280, y=560)
 
-    def show_window(self, text='0001'):
-        showinfo(
-            title=text,
-            message= show_window.get())
-    
-    def option_changed(self, *args):
+    def option_changed(self):
         self.output_label['text'] = f'You selected: {self.option_var.get()}'
 
-    def getWeather(self):
-        city = self.search_txtfield.get()
-        try:
-            geolocator = Nominatim(user_agent='geopiExercises')
-            location= geolocator.geocode(city)
-            obj = TimezoneFinder()
-            result = obj.timezone_at(lng=location.longitude, lat=location.latitude)
-                
-            home = pytz.timezone(result)
-            local_time = datetime.now(home)
-            current_time = local_time.strftime('%I:%M %p')
-            self.var_clock.config(text=current_time)
+    def getWeather(self,METRICS='metric'):
+        CITY = self.search_txtfield.get()
+        METRICS = self.op
+        print('city sucess')
+        self.city_data = City_Data(CITY=CITY, METRICS=METRICS)
+        print('city data  sucess')
+        self.var_clock.config(text=current_time())
+        print('var clock sucess 1')
+        self.var_temp.config(text=self.city_data.var_temperature)
+        print('var temp sucess 1')
+        self.var_feels_like.config(text=self.city_data.var_feels_like)
+        print('var feels like sucess 1')
+        self.var_wind.config(text=self.city_data.var_wind)
+        print('var wind like sucess 1')
+        self.var_humidity.config(text=self.city_data.var_humidity)
+        print('var humidity like sucess 1')
+        self.var_pressure.config(text=self.city_data.var_pressure)
+        print('var pressure like sucess 1')
+        self.var_sunrise_time.config(text=self.city_data.var_sunrise_time)
+        print('var sunrise like sucess 1')
+        self.var_sunset_time.config(text=self.city_data.var_sunset_time)
+        print('var sunset like sucess 1')
+        self.var_timezone.config(text=self.city_data.var_timezone)
+        print('var timezone like sucess 1')
 
 
-            METRICS = 'metric'
-
-            city_data = City_Data(CITY=city, METRICS=METRICS)
-
-            self.var_temp.config(text=city_data.var_temperature)
-            self.var_feels_like.config(text=city_data.var_feels_like)
-            self.var_wind.config(text=city_data.var_wind)
-            self.var_humidity.config(text=city_data.var_humidity)
-            self.var_pressure.config(text=city_data.var_pressure)
-            self.var_sunrise_time.config(text=city_data.var_sunrise_time)
-            self.var_sunset_time.config(text=city_data.var_sunset_time)
-            self.var_timezone.config(text=city_data.var_timezone)
-
-        except:
-            self.show_window('getWeather ERROR')
+    

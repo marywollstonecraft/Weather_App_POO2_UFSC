@@ -43,3 +43,4 @@ class City_Data:
                 return f"""{self.CITY}
                 {self.var_temperature}
                 {self.var_description}"""
+
