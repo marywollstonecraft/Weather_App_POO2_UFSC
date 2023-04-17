@@ -3,4 +3,3 @@ tk
 timezonefinder
 datetime
 pytz
-geopy
